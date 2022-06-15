@@ -1,20 +1,24 @@
 import ArgumentParser
+import Foundation
 @available(macOS 11.0, *)
 @main
 struct Repeat: ArgumentParser.ParsableCommand {
     @Flag(inversion: FlagInversion.prefixedNo, help: "fast")
     var fast = false
 
+    @Argument(help: "x origin")
+    var x: Int
 
-    // @Option(name: .shortAndLong, help: "User word file")
-    // var wordfile: String?
+    @Argument(help: "y origin")
+    var y: Int
 
-    @Argument(completion: .file(extensions: ["jpg","jpeg","png","tiff"]))
-    var files: [String] = []
+    @Argument(help: "width")
+    var width: Int
 
+    @Argument(help: "height")
+    var height: Int
 
     mutating func run() throws {
-        Runner.run( files: files)
-
+        Runner.run(rect: CGRect(x: x, y: y, width: width, height: height))
     }
 }
